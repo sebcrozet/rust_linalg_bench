@@ -4,8 +4,8 @@ version = "0.1.0"
 authors = ["Sébastien Crozet <developer@crozet.re>"]
 
 [dependencies]
-nalgebra        = { version = "*", path = "../nalgebra-dev", features = [ "debug" ] }
-nalgebra-lapack = { version = "*", path = "../nalgebra-dev/nalgebra-lapack" }
+nalgebra        = { version = "*", git = "https://github.com/sebcrozet/nalgebra", branch = "linalg", features = [ "debug" ] }
+nalgebra-lapack = { version = "*", git = "https://github.com/sebcrozet/nalgebra", branch = "linalg" }
 rulinalg        = { version = "*", git = "https://github.com/sebcrozet/rulinalg" }
 rand            = "*"
 cgmath          = { version = "*", features = [ "simd" ] }

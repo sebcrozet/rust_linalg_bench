@@ -6,4 +6,6 @@ mod inverse;
 mod full_piv_lu;
 mod hessenberg;
 mod eigen;
+mod symmetric_eigen;
 mod svd;
+mod schur;

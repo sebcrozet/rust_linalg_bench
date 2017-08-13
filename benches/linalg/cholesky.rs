@@ -59,6 +59,12 @@ fn cholesky_unpack_100x100_linxal(bh: &mut Bencher) {
 }
 
 #[bench]
+fn cholesky_unpack_100x100_linxal_column_major(bh: &mut Bencher) {
+    let m = ::reproductible_column_major_sdp_ndarray(100);
+    bh.iter(|| test::black_box(m.cholesky(Symmetric::Lower)))
+}
+
+#[bench]
 fn cholesky_unpack_100x100_ndarray_linalg(bh: &mut Bencher) {
     let m = ::reproductible_sdp_ndarray(100);
     bh.iter(|| test::black_box(CholeskyInto::cholesky_into(m.clone(), UPLO::Lower)))
@@ -117,6 +123,12 @@ fn cholesky_unpack_200x200_linxal(bh: &mut Bencher) {
 }
 
 #[bench]
+fn cholesky_unpack_200x200_linxal_column_major(bh: &mut Bencher) {
+    let m = ::reproductible_column_major_sdp_ndarray(200);
+    bh.iter(|| test::black_box(m.cholesky(Symmetric::Lower)))
+}
+
+#[bench]
 fn cholesky_unpack_200x200_ndarray_linalg(bh: &mut Bencher) {
     let m = ::reproductible_sdp_ndarray(200);
     bh.iter(|| test::black_box(CholeskyInto::cholesky_into(m.clone(), UPLO::Lower)))
@@ -171,6 +183,12 @@ fn cholesky_unpack_500x500_na_lapack(bh: &mut Bencher) {
 #[bench]
 fn cholesky_unpack_500x500_linxal(bh: &mut Bencher) {
     let m = ::reproductible_sdp_ndarray(500);
+    bh.iter(|| test::black_box(m.cholesky(Symmetric::Lower)))
+}
+
+#[bench]
+fn cholesky_unpack_500x500_linxal_column_major(bh: &mut Bencher) {
+    let m = ::reproductible_column_major_sdp_ndarray(500);
     bh.iter(|| test::black_box(m.cholesky(Symmetric::Lower)))
 }
 

@@ -19,7 +19,7 @@ mod linalg;
 use rand::{Rng, IsaacRng};
 use na::dimension::Dynamic;
 use na::debug::RandomSDP;
-use ndarray::{Array1, Array2};
+use ndarray::{ShapeBuilder, Array1, Array2};
 
 
 
@@ -168,4 +168,15 @@ fn reproductible_dmatrix_ndarray(nrows: usize, ncols: usize) -> Array2<f64> {
 fn reproductible_sdp_ndarray(dim: usize) -> Array2<f64> {
     let m = reproductible_sdp_na(dim);
     Array2::from_shape_fn((dim, dim), |(i, j)| m[(i, j)])
+}
+
+fn reproductible_column_major_dmatrix_ndarray(nrows: usize, ncols: usize) -> Array2<f64> {
+    let m = reproductible_dmatrix_na(nrows, ncols);
+    Array2::from_shape_fn((nrows, ncols).f(), |(i, j)| m[(i, j)])
+}
+
+
+fn reproductible_column_major_sdp_ndarray(dim: usize) -> Array2<f64> {
+    let m = reproductible_sdp_na(dim);
+    Array2::from_shape_fn((dim, dim).f(), |(i, j)| m[(i, j)])
 }

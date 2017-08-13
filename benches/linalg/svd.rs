@@ -35,6 +35,12 @@ fn svd_100x100_linxal(bh: &mut Bencher) {
 }
 
 #[bench]
+fn svd_100x100_linxal_column_major(bh: &mut Bencher) {
+    let m = ::reproductible_column_major_sdp_ndarray(100);
+    bh.iter(|| test::black_box(m.svd_full()))
+}
+
+#[bench]
 fn svd_100x100_ndarray_linalg(bh: &mut Bencher) {
     let m = ::reproductible_sdp_ndarray(100);
     bh.iter(|| test::black_box(m.svd(true, true)))
@@ -68,6 +74,12 @@ fn svd_200x200_na_lapack(bh: &mut Bencher) {
 #[bench]
 fn svd_200x200_linxal(bh: &mut Bencher) {
     let m = ::reproductible_sdp_ndarray(200);
+    bh.iter(|| test::black_box(m.svd_full()))
+}
+
+#[bench]
+fn svd_200x200_linxal_column_major(bh: &mut Bencher) {
+    let m = ::reproductible_column_major_sdp_ndarray(200);
     bh.iter(|| test::black_box(m.svd_full()))
 }
 

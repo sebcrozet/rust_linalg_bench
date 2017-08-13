@@ -35,6 +35,12 @@ fn lu_100x100_linxal(bh: &mut Bencher) {
 }
 
 #[bench]
+fn lu_100x100_linxal_column_major(bh: &mut Bencher) {
+    let m = ::reproductible_column_major_dmatrix_ndarray(100, 100);
+    bh.iter(|| test::black_box(factorization::LU::compute_into(m.clone())))
+}
+
+#[bench]
 fn lu_100x100_ndarray_linalg(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_ndarray(100, 100);
     bh.iter(|| test::black_box(m.clone().factorize_into()))
@@ -84,6 +90,12 @@ fn lu_200x200_linxal(bh: &mut Bencher) {
 }
 
 #[bench]
+fn lu_200x200_linxal_column_major(bh: &mut Bencher) {
+    let m = ::reproductible_column_major_dmatrix_ndarray(200, 200);
+    bh.iter(|| test::black_box(factorization::LU::compute_into(m.clone())))
+}
+
+#[bench]
 fn lu_200x200_ndarray_linalg(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_ndarray(200, 200);
     bh.iter(|| test::black_box(m.clone().factorize_into()))
@@ -127,6 +139,12 @@ fn lu_500x500_na_lapack(bh: &mut Bencher) {
 #[bench]
 fn lu_500x500_linxal(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_ndarray(500, 500);
+    bh.iter(|| test::black_box(factorization::LU::compute_into(m.clone())))
+}
+
+#[bench]
+fn lu_500x500_linxal_column_major(bh: &mut Bencher) {
+    let m = ::reproductible_column_major_dmatrix_ndarray(500, 500);
     bh.iter(|| test::black_box(factorization::LU::compute_into(m.clone())))
 }
 

@@ -1,5 +1,4 @@
 use test::{self, Bencher};
-use na::FullPivLU;
 use rulinalg::matrix::decomposition::{Decomposition, FullPivLu as RuFullPivLu};
 
 /*
@@ -10,7 +9,7 @@ use rulinalg::matrix::decomposition::{Decomposition, FullPivLu as RuFullPivLu};
 #[bench]
 fn full_piv_lu_100x100_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 100);
-    bh.iter(|| test::black_box(FullPivLU::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().full_piv_lu()))
 }
 
 
@@ -24,7 +23,7 @@ fn full_piv_lu_100x100_rulinalg(bh: &mut Bencher) {
 #[bench]
 fn full_piv_lu_unpack_100x100_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 100);
-    bh.iter(|| test::black_box(FullPivLU::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().full_piv_lu().unpack()))
 }
 
 
@@ -43,7 +42,7 @@ fn full_piv_lu_unpack_100x100_rulinalg(bh: &mut Bencher) {
 #[bench]
 fn full_piv_lu_200x200_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(200, 200);
-    bh.iter(|| test::black_box(FullPivLU::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().full_piv_lu()))
 }
 
 
@@ -57,7 +56,7 @@ fn full_piv_lu_200x200_rulinalg(bh: &mut Bencher) {
 #[bench]
 fn full_piv_lu_unpack_200x200_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(200, 200);
-    bh.iter(|| test::black_box(FullPivLU::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().full_piv_lu().unpack()))
 }
 
 
@@ -75,7 +74,7 @@ fn full_piv_lu_unpack_200x200_rulinalg(bh: &mut Bencher) {
 #[bench]
 fn full_piv_lu_500x500_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 500);
-    bh.iter(|| test::black_box(FullPivLU::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().full_piv_lu()))
 }
 
 
@@ -89,7 +88,7 @@ fn full_piv_lu_500x500_rulinalg(bh: &mut Bencher) {
 #[bench]
 fn full_piv_lu_unpack_500x500_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 500);
-    bh.iter(|| test::black_box(FullPivLU::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().full_piv_lu().unpack()))
 }
 
 

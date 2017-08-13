@@ -1,5 +1,4 @@
 use test::{self, Bencher};
-use na::Cholesky;
 use nl;
 use linxal::prelude::*;
 use ndarray_linalg::cholesky::CholeskyInto;
@@ -14,7 +13,7 @@ use rulinalg::matrix::decomposition::{Decomposition, Cholesky as RuCholesky};
 #[bench]
 fn cholesky_100x100_na(bh: &mut Bencher) {
     let m = ::reproductible_sdp_na(100);
-    bh.iter(|| test::black_box(Cholesky::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().cholesky()))
 }
 
 
@@ -35,7 +34,7 @@ fn cholesky_100x100_na_lapack(bh: &mut Bencher) {
 #[bench]
 fn cholesky_unpack_100x100_na(bh: &mut Bencher) {
     let m = ::reproductible_sdp_na(100);
-    bh.iter(|| test::black_box(Cholesky::new(m.clone()).unwrap().unpack()))
+    bh.iter(|| test::black_box(m.clone().cholesky().unwrap().unpack()))
 }
 
 
@@ -73,7 +72,7 @@ fn cholesky_unpack_100x100_ndarray_linalg(bh: &mut Bencher) {
 #[bench]
 fn cholesky_200x200_na(bh: &mut Bencher) {
     let m = ::reproductible_sdp_na(200);
-    bh.iter(|| test::black_box(Cholesky::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().cholesky()))
 }
 
 
@@ -94,7 +93,7 @@ fn cholesky_200x200_na_lapack(bh: &mut Bencher) {
 #[bench]
 fn cholesky_unpack_200x200_na(bh: &mut Bencher) {
     let m = ::reproductible_sdp_na(200);
-    bh.iter(|| test::black_box(Cholesky::new(m.clone()).unwrap().unpack()))
+    bh.iter(|| test::black_box(m.clone().cholesky().unwrap().unpack()))
 }
 
 
@@ -131,7 +130,7 @@ fn cholesky_unpack_200x200_ndarray_linalg(bh: &mut Bencher) {
 #[bench]
 fn cholesky_500x500_na(bh: &mut Bencher) {
     let m = ::reproductible_sdp_na(500);
-    bh.iter(|| test::black_box(Cholesky::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().cholesky()))
 }
 
 
@@ -153,7 +152,7 @@ fn cholesky_500x500_na_lapack(bh: &mut Bencher) {
 #[bench]
 fn cholesky_unpack_500x500_na(bh: &mut Bencher) {
     let m = ::reproductible_sdp_na(500);
-    bh.iter(|| test::black_box(Cholesky::new(m.clone()).unwrap().unpack()))
+    bh.iter(|| test::black_box(m.clone().cholesky().unwrap().unpack()))
 }
 
 

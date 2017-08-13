@@ -1,5 +1,4 @@
 use test::{self, Bencher};
-use na::LU;
 use nl;
 use ndarray_linalg::solve::FactorizeInto;
 use linxal::factorization;
@@ -13,7 +12,7 @@ use rulinalg::matrix::decomposition::{Decomposition, PartialPivLu};
 #[bench]
 fn lu_100x100_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 100);
-    bh.iter(|| test::black_box(LU::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().lu()))
 }
 
 
@@ -44,7 +43,7 @@ fn lu_100x100_ndarray_linalg(bh: &mut Bencher) {
 #[bench]
 fn lu_unpack_100x100_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 100);
-    bh.iter(|| test::black_box(LU::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().lu().unpack()))
 }
 
 #[bench]
@@ -62,7 +61,7 @@ fn lu_unpack_100x100_rulinalg(bh: &mut Bencher) {
 #[bench]
 fn lu_200x200_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(200, 200);
-    bh.iter(|| test::black_box(LU::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().lu()))
 }
 
 
@@ -93,7 +92,7 @@ fn lu_200x200_ndarray_linalg(bh: &mut Bencher) {
 #[bench]
 fn lu_unpack_200x200_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(200, 200);
-    bh.iter(|| test::black_box(LU::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().lu().unpack()))
 }
 
 #[bench]
@@ -110,7 +109,7 @@ fn lu_unpack_200x200_rulinalg(bh: &mut Bencher) {
 #[bench]
 fn lu_500x500_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 500);
-    bh.iter(|| test::black_box(LU::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().lu()))
 }
 
 #[bench]
@@ -141,7 +140,7 @@ fn lu_500x500_ndarray_linalg(bh: &mut Bencher) {
 #[bench]
 fn lu_unpack_500x500_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 500);
-    bh.iter(|| test::black_box(LU::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().lu().unpack()))
 }
 
 

@@ -1,5 +1,4 @@
 use test::{self, Bencher};
-use na::QR;
 use nl;
 use linxal::prelude::*;
 use ndarray_linalg::qr::QRSquareInto;
@@ -15,7 +14,7 @@ use rulinalg::matrix::decomposition::{Decomposition, HouseholderQr};
 #[bench]
 fn qr_100x100_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 100);
-    bh.iter(|| test::black_box(QR::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().qr()))
 }
 
 
@@ -40,7 +39,7 @@ fn qr_100x100_linxal(bh: &mut Bencher) {
 #[bench]
 fn qr_unpack_100x100_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 100);
-    bh.iter(|| test::black_box(QR::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().qr().unpack()))
 }
 
 
@@ -72,7 +71,7 @@ fn qr_unpack_100x100_ndarray_linalg(bh: &mut Bencher) {
 #[bench]
 fn qr_200x200_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(200, 200);
-    bh.iter(|| test::black_box(QR::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().qr()))
 }
 
 
@@ -98,7 +97,7 @@ fn qr_200x200_linxal(bh: &mut Bencher) {
 #[bench]
 fn qr_unpack_200x200_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(200, 200);
-    bh.iter(|| test::black_box(QR::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().qr().unpack()))
 }
 
 
@@ -133,7 +132,7 @@ fn qr_unpack_200x200_ndarray_linalg(bh: &mut Bencher) {
 #[bench]
 fn qr_100x500_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 500);
-    bh.iter(|| test::black_box(QR::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().qr()))
 }
 
 
@@ -159,7 +158,7 @@ fn qr_100x500_linxal(bh: &mut Bencher) {
 #[bench]
 fn qr_unpack_100x500_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 500);
-    bh.iter(|| test::black_box(QR::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().qr().unpack()))
 }
 
 
@@ -186,7 +185,7 @@ fn qr_unpack_100x500_na_lapack(bh: &mut Bencher) {
 #[bench]
 fn qr_500x100_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 100);
-    bh.iter(|| test::black_box(QR::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().qr()))
 }
 
 
@@ -212,7 +211,7 @@ fn qr_500x100_linxal(bh: &mut Bencher) {
 #[bench]
 fn qr_unpack_500x100_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 100);
-    bh.iter(|| test::black_box(QR::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().qr().unpack()))
 }
 
 
@@ -241,7 +240,7 @@ fn qr_unpack_500x100_na_lapack(bh: &mut Bencher) {
 #[bench]
 fn qr_500x500_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 500);
-    bh.iter(|| test::black_box(QR::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().qr()))
 }
 
 
@@ -268,7 +267,7 @@ fn qr_500x500_linxal(bh: &mut Bencher) {
 #[bench]
 fn qr_unpack_500x500_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 500);
-    bh.iter(|| test::black_box(QR::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().qr().unpack()))
 }
 
 

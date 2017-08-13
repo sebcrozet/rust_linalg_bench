@@ -1,5 +1,5 @@
 use test::{self, Bencher};
-use na::LU;
+use nl;
 use ndarray_linalg::solve::FactorizeInto;
 use ndarray_linalg::lapack_traits::Transpose;
 use rulinalg::matrix::decomposition::PartialPivLu;
@@ -14,7 +14,7 @@ use rulinalg::matrix::decomposition::PartialPivLu;
 fn lu_solve_100x100_na(bh: &mut Bencher) {
     let m  = ::reproductible_dmatrix_na(100, 100);
     let b  = ::reproductible_dvector_na(100);
-    let lu = LU::new(m);
+    let lu = m.lu();
     bh.iter(|| test::black_box(lu.solve(&b)))
 }
 
@@ -34,7 +34,7 @@ fn lu_solve_100x100_rulinalg(bh: &mut Bencher) {
 fn lu_solve_100x100_na_lapack(bh: &mut Bencher) {
     let m  = ::reproductible_dmatrix_na(100, 100);
     let b  = ::reproductible_dvector_na(100);
-    let lu = LU::new(m);
+    let lu = nl::LU::new(m);
     bh.iter(|| test::black_box(lu.solve(&b)))
 }
 
@@ -56,7 +56,7 @@ fn lu_solve_100x100_ndarray_linalg(bh: &mut Bencher) {
 fn lu_solve_200x200_na(bh: &mut Bencher) {
     let m  = ::reproductible_dmatrix_na(200, 200);
     let b  = ::reproductible_dvector_na(200);
-    let lu = LU::new(m);
+    let lu = m.lu();
     bh.iter(|| test::black_box(lu.solve(&b)))
 }
 
@@ -76,7 +76,7 @@ fn lu_solve_200x200_rulinalg(bh: &mut Bencher) {
 fn lu_solve_200x200_na_lapack(bh: &mut Bencher) {
     let m  = ::reproductible_dmatrix_na(200, 200);
     let b  = ::reproductible_dvector_na(200);
-    let lu = LU::new(m);
+    let lu = nl::LU::new(m);
     bh.iter(|| test::black_box(lu.solve(&b)))
 }
 
@@ -99,7 +99,7 @@ fn lu_solve_200x200_ndarray_linalg(bh: &mut Bencher) {
 fn lu_solve_500x500_na(bh: &mut Bencher) {
     let m  = ::reproductible_dmatrix_na(500, 500);
     let b  = ::reproductible_dvector_na(500);
-    let lu = LU::new(m);
+    let lu = m.lu();
     bh.iter(|| test::black_box(lu.solve(&b)))
 }
 
@@ -119,7 +119,7 @@ fn lu_solve_500x500_rulinalg(bh: &mut Bencher) {
 fn lu_solve_500x500_na_lapack(bh: &mut Bencher) {
     let m  = ::reproductible_dmatrix_na(500, 500);
     let b  = ::reproductible_dvector_na(500);
-    let lu = LU::new(m);
+    let lu = nl::LU::new(m);
     bh.iter(|| test::black_box(lu.solve(&b)))
 }
 

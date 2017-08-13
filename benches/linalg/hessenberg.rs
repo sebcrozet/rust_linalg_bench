@@ -1,5 +1,4 @@
 use test::{self, Bencher};
-use na::Hessenberg;
 use nl;
 use rulinalg::matrix::decomposition::{Decomposition, HessenbergDecomposition};
 
@@ -11,7 +10,7 @@ use rulinalg::matrix::decomposition::{Decomposition, HessenbergDecomposition};
 #[bench]
 fn hessenberg_100x100_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 100);
-    bh.iter(|| test::black_box(Hessenberg::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().hessenberg()))
 }
 
 
@@ -31,7 +30,7 @@ fn hessenberg_100x100_na_lapack(bh: &mut Bencher) {
 #[bench]
 fn hessenberg_unpack_100x100_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 100);
-    bh.iter(|| test::black_box(Hessenberg::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().hessenberg().unpack()))
 }
 
 
@@ -56,7 +55,7 @@ fn hessenberg_unpack_100x100_na_lapack(bh: &mut Bencher) {
 #[bench]
 fn hessenberg_200x200_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(200, 200);
-    bh.iter(|| test::black_box(Hessenberg::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().hessenberg()))
 }
 
 
@@ -76,7 +75,7 @@ fn hessenberg_200x200_na_lapack(bh: &mut Bencher) {
 #[bench]
 fn hessenberg_unpack_200x200_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(200, 200);
-    bh.iter(|| test::black_box(Hessenberg::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().hessenberg().unpack()))
 }
 
 
@@ -100,7 +99,7 @@ fn hessenberg_unpack_200x200_na_lapack(bh: &mut Bencher) {
 #[bench]
 fn hessenberg_500x500_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 500);
-    bh.iter(|| test::black_box(Hessenberg::new(m.clone())))
+    bh.iter(|| test::black_box(m.clone().hessenberg()))
 }
 
 
@@ -120,7 +119,7 @@ fn hessenberg_500x500_na_lapack(bh: &mut Bencher) {
 #[bench]
 fn hessenberg_unpack_500x500_na(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 500);
-    bh.iter(|| test::black_box(Hessenberg::new(m.clone()).unpack()))
+    bh.iter(|| test::black_box(m.clone().hessenberg().unpack()))
 }
 
 

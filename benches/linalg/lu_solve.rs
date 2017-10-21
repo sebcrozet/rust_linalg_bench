@@ -1,7 +1,7 @@
 use test::{self, Bencher};
 use nl;
+use ndarray_linalg::Solve;
 use ndarray_linalg::solve::FactorizeInto;
-use ndarray_linalg::lapack_traits::Transpose;
 use rulinalg::matrix::decomposition::PartialPivLu;
 
 
@@ -44,7 +44,7 @@ fn lu_solve_100x100_ndarray_linalg(bh: &mut Bencher) {
     let b  = ::reproductible_dvector_ndarray(100);
     let lu = m.factorize_into().unwrap();
     // See the note about the rulinalg lu_solve bench.
-    bh.iter(|| test::black_box(lu.solve(Transpose::No, b.clone())))
+    bh.iter(|| test::black_box(lu.solve(&b)))
 }
 
 /*
@@ -86,7 +86,7 @@ fn lu_solve_200x200_ndarray_linalg(bh: &mut Bencher) {
     let b  = ::reproductible_dvector_ndarray(200);
     let lu = m.factorize_into().unwrap();
     // See the note about the rulinalg lu_solve bench.
-    bh.iter(|| test::black_box(lu.solve(Transpose::No, b.clone())))
+    bh.iter(|| test::black_box(lu.solve(&b)))
 }
 
 
@@ -129,5 +129,5 @@ fn lu_solve_500x500_ndarray_linalg(bh: &mut Bencher) {
     let b  = ::reproductible_dvector_ndarray(500);
     let lu = m.factorize_into().unwrap();
     // See the note about the rulinalg lu_solve bench.
-    bh.iter(|| test::black_box(lu.solve(Transpose::No, b.clone())))
+    bh.iter(|| test::black_box(lu.solve(&b)))
 }

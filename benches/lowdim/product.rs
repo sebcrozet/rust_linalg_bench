@@ -2,9 +2,6 @@ use std::ops::Mul;
 use test::{self, Bencher};
 use cgmath::InnerSpace;
 
-#[path="../macros.rs"]
-mod macros;
-
 /*
  *
  * nalgebra

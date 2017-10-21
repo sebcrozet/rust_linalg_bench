@@ -13,6 +13,7 @@ extern crate ndarray;
 extern crate ndarray_linalg;
 
 
+mod macros;
 mod lowdim;
 mod linalg;
 

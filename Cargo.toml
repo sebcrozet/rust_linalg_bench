@@ -9,6 +9,6 @@ nalgebra-lapack = { version = "*" }
 rulinalg        = { version = "*", git = "https://github.com/sebcrozet/rulinalg" }
 rand            = "*"
 cgmath          = { version = "*", features = [ "simd" ] }
-ndarray         = "0.9"
-linxal          = { version = "*", features = [ "openblas" ] }
-ndarray-linalg  = { version = "*", features = [ "openblas" ] }
+ndarray         = "0.10"
+linxal          = { git = "https://github.com/masonium/linxal.git", features = [ "openblas-static" ] }
+ndarray-linalg  = { version = "*", features = [ "openblas-static" ] }

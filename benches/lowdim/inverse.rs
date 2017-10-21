@@ -1,10 +1,6 @@
 use test::{self, Bencher};
 use cgmath::SquareMatrix;
 
-#[path="../macros.rs"]
-mod macros;
-
-
 /*
  *
  * nalgebra

@@ -1,6 +1,8 @@
 use test::{self, Bencher};
+#[cfg(feature = "lapack")]
 use nl;
-use linxal::prelude::*;
+//use linxal::prelude::*;
+#[cfg(feature = "lapack")]
 use ndarray_linalg::qr::QRSquareInto;
 use rulinalg::matrix::decomposition::{Decomposition, HouseholderQr};
 
@@ -25,22 +27,23 @@ fn qr_100x100_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn qr_100x100_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 100);
     bh.iter(|| test::black_box(nl::QR::new(m.clone())))
 }
 
-#[bench]
-fn qr_100x100_linxal(bh: &mut Bencher) {
-    let m = ::reproductible_dmatrix_ndarray(100, 100);
-    bh.iter(|| test::black_box(m.qr()))
-}
-
-#[bench]
-fn qr_100x100_linxal_column_major(bh: &mut Bencher) {
-    let m = ::reproductible_column_major_dmatrix_ndarray(100, 100);
-    bh.iter(|| test::black_box(m.qr()))
-}
+//#[bench]
+//fn qr_100x100_linxal(bh: &mut Bencher) {
+//    let m = ::reproductible_dmatrix_ndarray(100, 100);
+//    bh.iter(|| test::black_box(m.qr()))
+//}
+//
+//#[bench]
+//fn qr_100x100_linxal_column_major(bh: &mut Bencher) {
+//    let m = ::reproductible_column_major_dmatrix_ndarray(100, 100);
+//    bh.iter(|| test::black_box(m.qr()))
+//}
 
 #[bench]
 fn qr_unpack_100x100_na(bh: &mut Bencher) {
@@ -56,12 +59,14 @@ fn qr_unpack_100x100_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn qr_unpack_100x100_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 100);
     bh.iter(|| test::black_box(nl::QR::new(m.clone()).unpack()))
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn qr_unpack_100x100_ndarray_linalg(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_ndarray(100, 100);
     bh.iter(|| test::black_box(QRSquareInto::qr_square_into(m.clone())))
@@ -88,22 +93,23 @@ fn qr_200x200_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn qr_200x200_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(200, 200);
     bh.iter(|| test::black_box(nl::QR::new(m.clone())))
 }
 
-#[bench]
-fn qr_200x200_linxal(bh: &mut Bencher) {
-    let m = ::reproductible_dmatrix_ndarray(200, 200);
-    bh.iter(|| test::black_box(m.qr()))
-}
-
-#[bench]
-fn qr_200x200_linxal_column_major(bh: &mut Bencher) {
-    let m = ::reproductible_column_major_dmatrix_ndarray(200, 200);
-    bh.iter(|| test::black_box(m.qr()))
-}
+//#[bench]
+//fn qr_200x200_linxal(bh: &mut Bencher) {
+//    let m = ::reproductible_dmatrix_ndarray(200, 200);
+//    bh.iter(|| test::black_box(m.qr()))
+//}
+//
+//#[bench]
+//fn qr_200x200_linxal_column_major(bh: &mut Bencher) {
+//    let m = ::reproductible_column_major_dmatrix_ndarray(200, 200);
+//    bh.iter(|| test::black_box(m.qr()))
+//}
 
 
 #[bench]
@@ -121,13 +127,14 @@ fn qr_unpack_200x200_rulinalg(bh: &mut Bencher) {
 
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn qr_unpack_200x200_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(200, 200);
     bh.iter(|| test::black_box(nl::QR::new(m.clone()).unpack()))
 }
 
-
 #[bench]
+#[cfg(feature = "lapack")]
 fn qr_unpack_200x200_ndarray_linalg(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_ndarray(200, 200);
     bh.iter(|| test::black_box(QRSquareInto::qr_square_into(m.clone())))
@@ -155,22 +162,23 @@ fn qr_100x500_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn qr_100x500_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 500);
     bh.iter(|| test::black_box(nl::QR::new(m.clone())))
 }
 
-#[bench]
-fn qr_100x500_linxal(bh: &mut Bencher) {
-    let m = ::reproductible_dmatrix_ndarray(100, 500);
-    bh.iter(|| test::black_box(m.qr()))
-}
-
-#[bench]
-fn qr_100x500_linxal_column_major(bh: &mut Bencher) {
-    let m = ::reproductible_column_major_dmatrix_ndarray(100, 500);
-    bh.iter(|| test::black_box(m.qr()))
-}
+//#[bench]
+//fn qr_100x500_linxal(bh: &mut Bencher) {
+//    let m = ::reproductible_dmatrix_ndarray(100, 500);
+//    bh.iter(|| test::black_box(m.qr()))
+//}
+//
+//#[bench]
+//fn qr_100x500_linxal_column_major(bh: &mut Bencher) {
+//    let m = ::reproductible_column_major_dmatrix_ndarray(100, 500);
+//    bh.iter(|| test::black_box(m.qr()))
+//}
 
 
 #[bench]
@@ -187,6 +195,7 @@ fn qr_unpack_100x500_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn qr_unpack_100x500_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 500);
     bh.iter(|| test::black_box(nl::QR::new(m.clone()).unpack()))
@@ -214,23 +223,24 @@ fn qr_500x100_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn qr_500x100_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 100);
     bh.iter(|| test::black_box(nl::QR::new(m.clone())))
 }
 
 
-#[bench]
-fn qr_500x100_linxal(bh: &mut Bencher) {
-    let m = ::reproductible_dmatrix_ndarray(500, 100);
-    bh.iter(|| test::black_box(m.qr()))
-}
-
-#[bench]
-fn qr_500x100_linxal_column_major(bh: &mut Bencher) {
-    let m = ::reproductible_column_major_dmatrix_ndarray(500, 100);
-    bh.iter(|| test::black_box(m.qr()))
-}
+//#[bench]
+//fn qr_500x100_linxal(bh: &mut Bencher) {
+//    let m = ::reproductible_dmatrix_ndarray(500, 100);
+//    bh.iter(|| test::black_box(m.qr()))
+//}
+//
+//#[bench]
+//fn qr_500x100_linxal_column_major(bh: &mut Bencher) {
+//    let m = ::reproductible_column_major_dmatrix_ndarray(500, 100);
+//    bh.iter(|| test::black_box(m.qr()))
+//}
 
 #[bench]
 fn qr_unpack_500x100_na(bh: &mut Bencher) {
@@ -247,6 +257,7 @@ fn qr_unpack_500x100_rulinalg(bh: &mut Bencher) {
 
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn qr_unpack_500x100_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 100);
     bh.iter(|| test::black_box(nl::QR::new(m.clone()).unpack()))
@@ -276,22 +287,23 @@ fn qr_500x500_rulinalg(bh: &mut Bencher) {
 
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn qr_500x500_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 500);
     bh.iter(|| test::black_box(nl::QR::new(m.clone())))
 }
 
-#[bench]
-fn qr_500x500_linxal(bh: &mut Bencher) {
-    let m = ::reproductible_dmatrix_ndarray(500, 500);
-    bh.iter(|| test::black_box(m.qr()))
-}
-
-#[bench]
-fn qr_500x500_linxal_column_major(bh: &mut Bencher) {
-    let m = ::reproductible_dmatrix_ndarray(500, 500);
-    bh.iter(|| test::black_box(m.qr()))
-}
+//#[bench]
+//fn qr_500x500_linxal(bh: &mut Bencher) {
+//    let m = ::reproductible_dmatrix_ndarray(500, 500);
+//    bh.iter(|| test::black_box(m.qr()))
+//}
+//
+//#[bench]
+//fn qr_500x500_linxal_column_major(bh: &mut Bencher) {
+//    let m = ::reproductible_dmatrix_ndarray(500, 500);
+//    bh.iter(|| test::black_box(m.qr()))
+//}
 
 
 #[bench]
@@ -308,12 +320,14 @@ fn qr_unpack_500x500_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn qr_unpack_500x500_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 500);
     bh.iter(|| test::black_box(nl::QR::new(m.clone()).unpack()))
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn qr_unpack_500x500_ndarray_linalg(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_ndarray(500, 500);
     bh.iter(|| test::black_box(QRSquareInto::qr_square_into(m.clone())))

@@ -3,12 +3,17 @@ name = "linalg_bench"
 version = "0.1.0"
 authors = ["Sébastien Crozet <developer@crozet.re>"]
 
+[features]
+lapack = [ "nalgebra-lapack", "ndarray-linalg" ]
+
 [dependencies]
-nalgebra        = { version = "*", features = [ "debug" ] }
-nalgebra-lapack = { version = "*" }
-rulinalg        = { version = "*", git = "https://github.com/sebcrozet/rulinalg" }
-rand            = "*"
-cgmath          = { version = "*", features = [ "simd" ] }
-ndarray         = "0.9"
-linxal          = { version = "*", features = [ "openblas" ] }
-ndarray-linalg  = { version = "*", features = [ "openblas" ] }
+nalgebra        = { version = "0.16", features = [ "debug" ] }
+nalgebra-lapack = { optional = true, version = "0.8", default_features = false, features = [ "openblas" ] }
+rulinalg        = { version = "0.4", git = "https://github.com/sebcrozet/rulinalg" }
+rand            = "0.5"
+cgmath          = { version = "0.16", features = [ "simd" ] }
+ndarray         = "0.12"
+# Note: linxal has not been updated on crates.io for 2 years (as of 5/11/2018).
+# So we remove it from the benchmark as is it likely not maintained any more.
+#linxal          = { version = "*", features = [ "openblas" ] }
+ndarray-linalg  = { optional = true, version = "0.10", default_features = false, features = [ "openblas" ] }

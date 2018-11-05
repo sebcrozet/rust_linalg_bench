@@ -1,15 +1,16 @@
 #![feature(test)]
-#![feature(cfg_target_feature)]
 
 extern crate test;
 extern crate rand;
 
 extern crate nalgebra as na;
+#[cfg(feature = "lapack")]
 extern crate nalgebra_lapack as nl;
 extern crate cgmath;
 extern crate rulinalg;
-extern crate linxal;
+//extern crate linxal;
 extern crate ndarray;
+#[cfg(feature = "lapack")]
 extern crate ndarray_linalg;
 
 

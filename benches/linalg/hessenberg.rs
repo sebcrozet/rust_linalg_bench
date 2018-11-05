@@ -1,4 +1,5 @@
 use test::{self, Bencher};
+#[cfg(feature = "lapack")]
 use nl;
 use rulinalg::matrix::decomposition::{Decomposition, HessenbergDecomposition};
 
@@ -21,6 +22,7 @@ fn hessenberg_100x100_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn hessenberg_100x100_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 100);
     bh.iter(|| test::black_box(nl::Hessenberg::new(m.clone())))
@@ -42,6 +44,7 @@ fn hessenberg_unpack_100x100_rulinalg(bh: &mut Bencher) {
 
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn hessenberg_unpack_100x100_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 100);
     bh.iter(|| test::black_box(nl::Hessenberg::new(m.clone()).unpack()))
@@ -66,6 +69,7 @@ fn hessenberg_200x200_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn hessenberg_200x200_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(200, 200);
     bh.iter(|| test::black_box(nl::Hessenberg::new(m.clone())))
@@ -86,6 +90,7 @@ fn hessenberg_unpack_200x200_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn hessenberg_unpack_200x200_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(200, 200);
     bh.iter(|| test::black_box(nl::Hessenberg::new(m.clone()).unpack()))
@@ -110,6 +115,7 @@ fn hessenberg_500x500_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn hessenberg_500x500_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 500);
     bh.iter(|| test::black_box(nl::Hessenberg::new(m.clone())))
@@ -131,6 +137,7 @@ fn hessenberg_unpack_500x500_rulinalg(bh: &mut Bencher) {
 
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn hessenberg_unpack_500x500_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(500, 500);
     bh.iter(|| test::black_box(nl::Hessenberg::new(m.clone()).unpack()))

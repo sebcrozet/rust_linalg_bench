@@ -1,6 +1,7 @@
 use test::{self, Bencher};
+#[cfg(feature = "lapack")]
 use nl;
-use linxal::prelude::*;
+//use linxal::prelude::*;
 
 
 /*
@@ -24,22 +25,23 @@ fn symmetric_eigenvalues_100x100_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn symmetric_eigenvalues_100x100_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_sdp_na(100);
     bh.iter(|| test::black_box(nl::SymmetricEigen::eigenvalues(m.clone())))
 }
 
-#[bench]
-fn symmetric_eigenvalues_100x100_linxal(bh: &mut Bencher) {
-    let m = ::reproductible_sdp_ndarray(100);
-    bh.iter(|| test::black_box(m.symmetric_eigenvalues(Symmetric::Lower)))
-}
-
-#[bench]
-fn symmetric_eigenvalues_100x100_linxal_column_major(bh: &mut Bencher) {
-    let m = ::reproductible_column_major_sdp_ndarray(100);
-    bh.iter(|| test::black_box(m.symmetric_eigenvalues(Symmetric::Lower)))
-}
+//#[bench]
+//fn symmetric_eigenvalues_100x100_linxal(bh: &mut Bencher) {
+//    let m = ::reproductible_sdp_ndarray(100);
+//    bh.iter(|| test::black_box(m.symmetric_eigenvalues(Symmetric::Lower)))
+//}
+//
+//#[bench]
+//fn symmetric_eigenvalues_100x100_linxal_column_major(bh: &mut Bencher) {
+//    let m = ::reproductible_column_major_sdp_ndarray(100);
+//    bh.iter(|| test::black_box(m.symmetric_eigenvalues(Symmetric::Lower)))
+//}
 
 
 /*
@@ -63,22 +65,23 @@ fn symmetric_eigenvalues_200x200_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn symmetric_eigenvalues_200x200_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_sdp_na(200);
     bh.iter(|| test::black_box(nl::SymmetricEigen::eigenvalues(m.clone())))
 }
 
-#[bench]
-fn symmetric_eigenvalues_200x200_linxal(bh: &mut Bencher) {
-    let m = ::reproductible_sdp_ndarray(200);
-    bh.iter(|| test::black_box(m.symmetric_eigenvalues(Symmetric::Lower)))
-}
-
-#[bench]
-fn symmetric_eigenvalues_200x200_linxal_column_major(bh: &mut Bencher) {
-    let m = ::reproductible_column_major_sdp_ndarray(200);
-    bh.iter(|| test::black_box(m.symmetric_eigenvalues(Symmetric::Lower)))
-}
+//#[bench]
+//fn symmetric_eigenvalues_200x200_linxal(bh: &mut Bencher) {
+//    let m = ::reproductible_sdp_ndarray(200);
+//    bh.iter(|| test::black_box(m.symmetric_eigenvalues(Symmetric::Lower)))
+//}
+//
+//#[bench]
+//fn symmetric_eigenvalues_200x200_linxal_column_major(bh: &mut Bencher) {
+//    let m = ::reproductible_column_major_sdp_ndarray(200);
+//    bh.iter(|| test::black_box(m.symmetric_eigenvalues(Symmetric::Lower)))
+//}
 
 /*
  *
@@ -95,21 +98,22 @@ fn symmetric_eigenvalues_500x500_na(bh: &mut Bencher) {
 
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn symmetric_eigenvalues_500x500_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_sdp_na(500);
     bh.iter(|| test::black_box(nl::SymmetricEigen::eigenvalues(m.clone())))
 }
 
-#[bench]
-fn symmetric_eigenvalues_500x500_linxal(bh: &mut Bencher) {
-    let m = ::reproductible_sdp_ndarray(500);
-    bh.iter(|| test::black_box(m.symmetric_eigenvalues(Symmetric::Lower)))
-}
-
-#[bench]
-fn symmetric_eigenvalues_500x500_linxal_column_major(bh: &mut Bencher) {
-    let m = ::reproductible_column_major_sdp_ndarray(500);
-    bh.iter(|| test::black_box(m.symmetric_eigenvalues(Symmetric::Lower)))
-}
+//#[bench]
+//fn symmetric_eigenvalues_500x500_linxal(bh: &mut Bencher) {
+//    let m = ::reproductible_sdp_ndarray(500);
+//    bh.iter(|| test::black_box(m.symmetric_eigenvalues(Symmetric::Lower)))
+//}
+//
+//#[bench]
+//fn symmetric_eigenvalues_500x500_linxal_column_major(bh: &mut Bencher) {
+//    let m = ::reproductible_column_major_sdp_ndarray(500);
+//    bh.iter(|| test::black_box(m.symmetric_eigenvalues(Symmetric::Lower)))
+//}
 
 // NOTE: rulinalg is not included because it takes too long to complete the 500x500 benchmarks.

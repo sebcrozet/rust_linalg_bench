@@ -1,6 +1,9 @@
 use test::{self, Bencher};
+#[cfg(feature = "lapack")]
 use nl;
-use ndarray_linalg::solve::FactorizeInto;
+#[cfg(feature = "lapack")]
+use ndarray_linalg::{Solve, solve::FactorizeInto};
+#[cfg(feature = "lapack")]
 use ndarray_linalg::lapack_traits::Transpose;
 use rulinalg::matrix::decomposition::PartialPivLu;
 
@@ -31,6 +34,7 @@ fn lu_solve_100x100_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn lu_solve_100x100_na_lapack(bh: &mut Bencher) {
     let m  = ::reproductible_dmatrix_na(100, 100);
     let b  = ::reproductible_dvector_na(100);
@@ -39,12 +43,13 @@ fn lu_solve_100x100_na_lapack(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn lu_solve_100x100_ndarray_linalg(bh: &mut Bencher) {
     let m  = ::reproductible_dmatrix_ndarray(100, 100);
     let b  = ::reproductible_dvector_ndarray(100);
     let lu = m.factorize_into().unwrap();
     // See the note about the rulinalg lu_solve bench.
-    bh.iter(|| test::black_box(lu.solve(Transpose::No, b.clone())))
+    bh.iter(|| test::black_box(lu.solve(&b)))
 }
 
 /*
@@ -73,6 +78,7 @@ fn lu_solve_200x200_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn lu_solve_200x200_na_lapack(bh: &mut Bencher) {
     let m  = ::reproductible_dmatrix_na(200, 200);
     let b  = ::reproductible_dvector_na(200);
@@ -81,12 +87,13 @@ fn lu_solve_200x200_na_lapack(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn lu_solve_200x200_ndarray_linalg(bh: &mut Bencher) {
     let m  = ::reproductible_dmatrix_ndarray(200, 200);
     let b  = ::reproductible_dvector_ndarray(200);
     let lu = m.factorize_into().unwrap();
     // See the note about the rulinalg lu_solve bench.
-    bh.iter(|| test::black_box(lu.solve(Transpose::No, b.clone())))
+    bh.iter(|| test::black_box(lu.solve(&b)))
 }
 
 
@@ -116,6 +123,7 @@ fn lu_solve_500x500_rulinalg(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn lu_solve_500x500_na_lapack(bh: &mut Bencher) {
     let m  = ::reproductible_dmatrix_na(500, 500);
     let b  = ::reproductible_dvector_na(500);
@@ -124,10 +132,11 @@ fn lu_solve_500x500_na_lapack(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn lu_solve_500x500_ndarray_linalg(bh: &mut Bencher) {
     let m  = ::reproductible_dmatrix_ndarray(500, 500);
     let b  = ::reproductible_dvector_ndarray(500);
     let lu = m.factorize_into().unwrap();
     // See the note about the rulinalg lu_solve bench.
-    bh.iter(|| test::black_box(lu.solve(Transpose::No, b.clone())))
+    bh.iter(|| test::black_box(lu.solve(&b)))
 }

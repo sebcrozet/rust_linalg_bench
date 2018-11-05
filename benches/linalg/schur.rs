@@ -1,4 +1,5 @@
 use test::{self, Bencher};
+#[cfg(feature = "lapack")]
 use nl;
 
 
@@ -16,6 +17,7 @@ fn schur_100x100_na(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn schur_100x100_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(100, 100);
     bh.iter(|| test::black_box(nl::RealSchur::new(m.clone())))
@@ -36,6 +38,7 @@ fn schur_200x200_na(bh: &mut Bencher) {
 }
 
 #[bench]
+#[cfg(feature = "lapack")]
 fn schur_200x200_na_lapack(bh: &mut Bencher) {
     let m = ::reproductible_dmatrix_na(200, 200);
     bh.iter(|| test::black_box(nl::RealSchur::new(m.clone())))

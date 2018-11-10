@@ -12,10 +12,14 @@ extern crate rulinalg;
 extern crate ndarray;
 #[cfg(feature = "lapack")]
 extern crate ndarray_linalg;
+#[cfg(feature = "sparse")]
+extern crate sprs;
 
 
 mod lowdim;
 mod linalg;
+#[cfg(feature = "sparse")]
+mod sparse;
 
 use rand::{Rng, IsaacRng};
 use na::dimension::Dynamic;
@@ -29,6 +33,19 @@ use ndarray::{ShapeBuilder, Array1, Array2};
  * For nalgebra.
  *
  */
+#[cfg(feature = "sparse")]
+fn reproductible_csmatrix_na(nrows: usize, ncols: usize, nzeros: usize) -> na::CsMatrix<f64> {
+    let mut rng = IsaacRng::new_unseeded();
+    let mut res = na::DMatrix::<f64>::from_fn(nrows, ncols, |_, _| rng.gen());
+
+    for i in 0..nzeros {
+        let i: usize = rng.gen::<usize>() % res.len();
+        res[i] = 0.0;
+    }
+
+    res.into()
+}
+
 fn reproductible_dmatrix_na(nrows: usize, ncols: usize) -> na::DMatrix<f64> {
     let mut rng = IsaacRng::new_unseeded();
     na::DMatrix::<f64>::from_fn(nrows, ncols, |_, _| rng.gen())
@@ -180,4 +197,19 @@ fn reproductible_column_major_dmatrix_ndarray(nrows: usize, ncols: usize) -> Arr
 fn reproductible_column_major_sdp_ndarray(dim: usize) -> Array2<f64> {
     let m = reproductible_sdp_na(dim);
     Array2::from_shape_fn((dim, dim).f(), |(i, j)| m[(i, j)])
+}
+
+/*
+ *
+ *
+ * For sprs
+ *
+ *
+ */
+#[cfg(feature = "sparse")]
+fn reproductible_csmatrix_sprs(nrows: usize, ncols: usize, nzeros: usize) -> sprs::CsMat<f64> {
+    let mat = reproductible_csmatrix_na(nrows, ncols, nzeros);
+    let mut inptr = mat.data.p().to_vec();
+    inptr.push(mat.len());
+    sprs::CsMat::new_csc((nrows, ncols), inptr, mat.data.i().to_vec(),  mat.data.values().to_vec())
 }

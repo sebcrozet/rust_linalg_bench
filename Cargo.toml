@@ -5,9 +5,10 @@ authors = ["Sébastien Crozet <developer@crozet.re>"]
 
 [features]
 lapack = [ "nalgebra-lapack", "ndarray-linalg" ]
+sparse = [ "sprs", "nalgebra/sparse", "nalgebra/io" ]
 
 [dependencies]
-nalgebra        = { version = "0.16", features = [ "debug" ] }
+nalgebra        = { version = "0.16", features = [ "debug" ], path = "../rust-dev/nalgebra-dev" }
 nalgebra-lapack = { optional = true, version = "0.8", default_features = false, features = [ "openblas" ] }
 rulinalg        = { version = "0.4", git = "https://github.com/sebcrozet/rulinalg" }
 rand            = "0.5"
@@ -17,3 +18,4 @@ ndarray         = "0.12"
 # So we remove it from the benchmark as is it likely not maintained any more.
 #linxal          = { version = "*", features = [ "openblas" ] }
 ndarray-linalg  = { optional = true, version = "0.10", default_features = false, features = [ "openblas" ] }
+sprs = { optional = true, version = "0.6" }

@@ -8,14 +8,19 @@ lapack = [ "nalgebra-lapack", "ndarray-linalg" ]
 sparse = [ "sprs", "nalgebra/sparse", "nalgebra/io" ]
 
 [dependencies]
-nalgebra        = { version = "0.16", features = [ "debug" ], path = "../rust-dev/nalgebra-dev" }
+nalgebra        = { version = "0.17", features = [ "debug" ], path = "../rust-dev/nalgebra-dev" }
 nalgebra-lapack = { optional = true, version = "0.8", default_features = false, features = [ "openblas" ] }
 rulinalg        = { version = "0.4", git = "https://github.com/sebcrozet/rulinalg" }
-rand            = "0.5"
-cgmath          = { version = "0.16", features = [ "simd" ] }
+rand            = "0.6"
+cgmath          = { version = "0.17" }
 ndarray         = "0.12"
 # Note: linxal has not been updated on crates.io for 2 years (as of 5/11/2018).
 # So we remove it from the benchmark as is it likely not maintained any more.
 #linxal          = { version = "*", features = [ "openblas" ] }
 ndarray-linalg  = { optional = true, version = "0.10", default_features = false, features = [ "openblas" ] }
 sprs = { optional = true, version = "0.6" }
+vek = "0.9"
+
+[profile.bench]
+lto = true
+codegen-units = 1

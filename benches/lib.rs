@@ -3,6 +3,7 @@
 extern crate test;
 extern crate rand;
 
+extern crate vek;
 extern crate nalgebra as na;
 #[cfg(feature = "lapack")]
 extern crate nalgebra_lapack as nl;
@@ -21,10 +22,11 @@ mod linalg;
 #[cfg(feature = "sparse")]
 mod sparse;
 
-use rand::{Rng, IsaacRng};
+use rand::{Rng, IsaacRng, SeedableRng};
 use na::dimension::Dynamic;
 use na::debug::RandomSDP;
 use ndarray::{ShapeBuilder, Array1, Array2};
+
 
 
 
@@ -35,7 +37,7 @@ use ndarray::{ShapeBuilder, Array1, Array2};
  */
 #[cfg(feature = "sparse")]
 fn reproductible_csmatrix_na(nrows: usize, ncols: usize, nzeros: usize) -> na::CsMatrix<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     let mut res = na::DMatrix::<f64>::from_fn(nrows, ncols, |_, _| rng.gen());
 
     for i in 0..nzeros {
@@ -47,48 +49,48 @@ fn reproductible_csmatrix_na(nrows: usize, ncols: usize, nzeros: usize) -> na::C
 }
 
 fn reproductible_dmatrix_na(nrows: usize, ncols: usize) -> na::DMatrix<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     na::DMatrix::<f64>::from_fn(nrows, ncols, |_, _| rng.gen())
 }
 
 fn reproductible_dvector_na(dim: usize) -> na::DVector<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     na::DVector::<f64>::from_fn(dim, |_, _| rng.gen())
 }
 
 fn reproductible_matrix4_na() -> na::Matrix4<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     na::Matrix4::<f64>::from_fn(|_, _| rng.gen())
 }
 
 fn reproductible_matrix3_na() -> na::Matrix3<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     na::Matrix3::<f64>::from_fn(|_, _| rng.gen())
 }
 
 fn reproductible_matrix2_na() -> na::Matrix2<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     na::Matrix2::<f64>::from_fn(|_, _| rng.gen())
 }
 
 
 fn reproductible_vector4_na() -> na::Vector4<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     na::Vector4::<f64>::from_fn(|_, _| rng.gen())
 }
 
 fn reproductible_vector3_na() -> na::Vector3<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     na::Vector3::<f64>::from_fn(|_, _| rng.gen())
 }
 
 fn reproductible_vector2_na() -> na::Vector2<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     na::Vector2::<f64>::from_fn(|_, _| rng.gen())
 }
 
 fn reproductible_sdp_na(dim: usize) -> na::DMatrix<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     RandomSDP::new(Dynamic::new(dim), || rng.gen()).unwrap()
 }
 
@@ -104,14 +106,14 @@ fn reproductible_sdp_na(dim: usize) -> na::DMatrix<f64> {
  *
  */
 fn reproductible_matrix2_cgmath() -> cgmath::Matrix2<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     cgmath::Matrix2::new(
         rng.gen(), rng.gen(),
         rng.gen(), rng.gen())
 }
 
 fn reproductible_matrix3_cgmath() -> cgmath::Matrix3<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     cgmath::Matrix3::new(
         rng.gen(), rng.gen(), rng.gen(),
         rng.gen(), rng.gen(), rng.gen(),
@@ -119,7 +121,7 @@ fn reproductible_matrix3_cgmath() -> cgmath::Matrix3<f64> {
 }
 
 fn reproductible_matrix4_cgmath() -> cgmath::Matrix4<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     cgmath::Matrix4::new(
         rng.gen(), rng.gen(), rng.gen(), rng.gen(),
         rng.gen(), rng.gen(), rng.gen(), rng.gen(),
@@ -128,18 +130,66 @@ fn reproductible_matrix4_cgmath() -> cgmath::Matrix4<f64> {
 }
 
 fn reproductible_vector2_cgmath() -> cgmath::Vector2<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     cgmath::Vector2::new(rng.gen(), rng.gen())
 }
 
 fn reproductible_vector3_cgmath() -> cgmath::Vector3<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     cgmath::Vector3::new(rng.gen(), rng.gen(), rng.gen())
 }
 
 fn reproductible_vector4_cgmath() -> cgmath::Vector4<f64> {
-    let mut rng = IsaacRng::new_unseeded();
+    let mut rng = IsaacRng::seed_from_u64(0);
     cgmath::Vector4::new(rng.gen(), rng.gen(), rng.gen(), rng.gen())
+}
+
+
+
+/*
+ *
+ *
+ * For vek.
+ *
+ *
+ */
+fn reproductible_matrix2_vek() -> vek::Mat2<f64> {
+    let mut rng = IsaacRng::seed_from_u64(0);
+    vek::Mat2::new(
+        rng.gen(), rng.gen(),
+        rng.gen(), rng.gen())
+}
+
+fn reproductible_matrix3_vek() -> vek::Mat3<f64> {
+    let mut rng = IsaacRng::seed_from_u64(0);
+    vek::Mat3::new(
+        rng.gen(), rng.gen(), rng.gen(),
+        rng.gen(), rng.gen(), rng.gen(),
+        rng.gen(), rng.gen(), rng.gen())
+}
+
+fn reproductible_matrix4_vek() -> vek::Mat4<f64> {
+    let mut rng = IsaacRng::seed_from_u64(0);
+    vek::Mat4::new(
+        rng.gen(), rng.gen(), rng.gen(), rng.gen(),
+        rng.gen(), rng.gen(), rng.gen(), rng.gen(),
+        rng.gen(), rng.gen(), rng.gen(), rng.gen(),
+        rng.gen(), rng.gen(), rng.gen(), rng.gen())
+}
+
+fn reproductible_vector2_vek() -> vek::Vec2<f64> {
+    let mut rng = IsaacRng::seed_from_u64(0);
+    vek::Vec2::new(rng.gen(), rng.gen())
+}
+
+fn reproductible_vector3_vek() -> vek::Vec3<f64> {
+    let mut rng = IsaacRng::seed_from_u64(0);
+    vek::Vec3::new(rng.gen(), rng.gen(), rng.gen())
+}
+
+fn reproductible_vector4_vek() -> vek::Vec4<f64> {
+    let mut rng = IsaacRng::seed_from_u64(0);
+    vek::Vec4::new(rng.gen(), rng.gen(), rng.gen(), rng.gen())
 }
 
 /*
